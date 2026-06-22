@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>财务部 AI 技能挑战赛活动方案</title>
+  <style>
+    :root {
+      --ink: #11120f;
+      --paper: #f7f8f0;
+      --line: #d7ddcc;
+      --green: #0b3b2e;
+      --mint: #bdf7d1;
+      --acid: #d8ff3e;
+      --red: #f04b32;
+      --gold: #d9b757;
+      --white: #fffef8;
+      --shadow: 0 24px 70px rgba(17, 18, 15, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(11, 59, 46, 0.045) 1px, transparent 1px),
+        linear-gradient(rgba(11, 59, 46, 0.045) 1px, transparent 1px),
+        var(--paper);
+      background-size: 34px 34px;
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    .page {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page::before,
+    .page::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      width: 38vw;
+      height: 38vw;
+      border-radius: 50%;
+      filter: blur(18px);
+      opacity: 0.22;
+      pointer-events: none;
+    }
+
+    .page::before {
+      top: -12vw;
+      right: -11vw;
+      background: var(--acid);
+    }
+
+    .page::after {
+      bottom: -18vw;
+      left: -14vw;
+      background: var(--mint);
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 46px;
+      align-items: center;
+      padding: 64px 0 56px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 8px 14px;
+      color: var(--green);
+      background: rgba(189, 247, 209, 0.52);
+      border: 1px solid rgba(11, 59, 46, 0.18);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--red);
+      box-shadow: 0 0 0 5px rgba(240, 75, 50, 0.14);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-family: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+      font-size: clamp(50px, 8vw, 98px);
+      line-height: 0.96;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-lead {
+      max-width: 700px;
+      margin: 28px 0 0;
+      font-size: 20px;
+      color: rgba(17, 18, 15, 0.76);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      color: var(--white);
+      background: var(--green);
+      border: 1px solid var(--green);
+      border-radius: 8px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(11, 59, 46, 0.18);
+    }
+
+    .button.secondary {
+      color: var(--green);
+      background: transparent;
+      border-color: rgba(11, 59, 46, 0.28);
+      box-shadow: none;
+    }
+
+    .poster-card {
+      position: relative;
+      min-height: 560px;
+      padding: 28px;
+      color: var(--white);
+      background: var(--green);
+      border: 1px solid rgba(17, 18, 15, 0.28);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .poster-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 78% 20%, rgba(216, 255, 62, 0.42), transparent 28%),
+        radial-gradient(circle at 18% 84%, rgba(240, 75, 50, 0.5), transparent 27%),
+        linear-gradient(115deg, transparent 0 46%, rgba(255, 254, 248, 0.08) 46% 48%, transparent 48% 100%);
+    }
+
+    .poster-card::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(255, 254, 248, 0.25);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .poster-grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.16;
+      background-image:
+        linear-gradient(rgba(255, 254, 248, 0.6) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 254, 248, 0.6) 1px, transparent 1px);
+      background-size: 26px 26px;
+      mask-image: linear-gradient(to bottom, #000, transparent 82%);
+    }
+
+    .poster-content {
+      position: relative;
+      display: flex;
+      min-height: 504px;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .poster-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 254, 248, 0.74);
+    }
+
+    .poster-mark {
+      width: 178px;
+      height: 178px;
+      align-self: flex-end;
+      margin-top: 48px;
+      border: 2px solid rgba(216, 255, 62, 0.9);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--acid);
+      font-family: "DIN Condensed", "Impact", sans-serif;
+      font-size: 56px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      box-shadow: inset 0 0 0 20px rgba(216, 255, 62, 0.08);
+    }
+
+    .poster-title {
+      margin-top: auto;
+      font-family: "Songti SC", "STSong", serif;
+      font-size: 52px;
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .poster-title span {
+      display: block;
+      color: var(--acid);
+      font-family: "PingFang SC", "Hiragino Sans GB", sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin-top: 14px;
+    }
+
+    .poster-foot {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 28px;
+      font-size: 13px;
+      color: rgba(255, 254, 248, 0.76);
+    }
+
+    .poster-foot b {
+      display: block;
+      color: var(--white);
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    section {
+      padding: 72px 0;
+      border-top: 1px solid rgba(17, 18, 15, 0.12);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.52fr 1fr;
+      gap: 34px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin: 0;
+      font-family: "Songti SC", "STSong", serif;
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1.05;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: rgba(17, 18, 15, 0.68);
+      font-size: 17px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card,
+    .panel {
+      background: rgba(255, 254, 248, 0.82);
+      border: 1px solid rgba(17, 18, 15, 0.13);
+      border-radius: 8px;
+      box-shadow: 0 10px 28px rgba(17, 18, 15, 0.06);
+    }
+
+    .card {
+      padding: 22px;
+    }
+
+    .card .num {
+      display: inline-grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      margin-bottom: 22px;
+      color: var(--green);
+      background: var(--acid);
+      border-radius: 50%;
+      font-weight: 900;
+    }
+
+    h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .card p {
+      margin: 0;
+      color: rgba(17, 18, 15, 0.68);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 22px;
+    }
+
+    .panel {
+      padding: 26px;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 20px 0;
+      border-bottom: 1px dashed rgba(17, 18, 15, 0.18);
+    }
+
+    .step:last-child {
+      border-bottom: 0;
+    }
+
+    .step time {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .step h3 {
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      margin: 0;
+      color: rgba(17, 18, 15, 0.68);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      background: rgba(255, 254, 248, 0.86);
+      border: 1px solid rgba(17, 18, 15, 0.13);
+      border-radius: 8px;
+      box-shadow: 0 10px 28px rgba(17, 18, 15, 0.06);
+    }
+
+    th,
+    td {
+      padding: 17px 18px;
+      text-align: left;
+      border-bottom: 1px solid rgba(17, 18, 15, 0.1);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--white);
+      background: var(--green);
+      font-size: 15px;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .score {
+      font-weight: 900;
+      color: var(--red);
+      white-space: nowrap;
+    }
+
+    .callout {
+      padding: 34px;
+      color: var(--white);
+      background:
+        linear-gradient(135deg, rgba(216, 255, 62, 0.18), transparent 38%),
+        var(--green);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .callout h2 {
+      color: var(--acid);
+    }
+
+    .callout p,
+    .callout li {
+      color: rgba(255, 254, 248, 0.8);
+    }
+
+    .callout .list li::before {
+      background: var(--acid);
+    }
+
+    .notice {
+      white-space: pre-line;
+      color: rgba(17, 18, 15, 0.72);
+      font-size: 17px;
+    }
+
+    footer {
+      padding: 54px 0 70px;
+      color: rgba(17, 18, 15, 0.58);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .section-head,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 38px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .poster-card {
+        min-height: 480px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .wrap {
+        width: min(100% - 24px, 1120px);
+      }
+
+      h1 {
+        font-size: 52px;
+      }
+
+      .poster-title {
+        font-size: 42px;
+      }
+
+      .poster-foot,
+      .step {
+        grid-template-columns: 1fr;
+      }
+
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+
+      th {
+        display: none;
+      }
+
+      td {
+        border-bottom: 0;
+        padding: 8px 16px;
+      }
+
+      tr {
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(17, 18, 15, 0.1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="wrap hero">
+      <div>
+        <div class="kicker">Finance AI Challenge · 内部活动方案</div>
+        <h1>财务部 AI 技能挑战赛</h1>
+        <p class="hero-lead">
+          鼓励财务同事使用 Work Buddy、Codex 等 AI Agent，从真实工作问题出发，完成一次可展示、可复用、可推广的提效实践。
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="#plan">查看活动安排</a>
+          <a class="button secondary" href="#score">评分标准</a>
+        </div>
+      </div>
+      <aside class="poster-card" aria-label="活动视觉预览">
+        <div class="poster-grid"></div>
+        <div class="poster-content">
+          <div class="poster-label">
+            <span>Agent × Finance</span>
+            <span>2026</span>
+          </div>
+          <div class="poster-mark">AI</div>
+          <div>
+            <div class="poster-title">
+              用 Agent<br>解决真实财务问题
+              <span>现金奖励 · 案例沉淀 · 部门推广</span>
+            </div>
+            <div class="poster-foot">
+              <div><b>4 周</b>完整赛程</div>
+              <div><b>100 分</b>评审机制</div>
+              <div><b>可复用</b>优秀案例库</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <section class="wrap" id="plan">
+      <div class="section-head">
+        <h2>活动定位</h2>
+        <p>这不是单纯的工具体验赛，而是一次围绕财务真实工作场景的 AI 实战提效活动。评审重点看业务价值、实际效果和可复制程度。</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="num">1</div>
+          <h3>从真实问题出发</h3>
+          <p>选择报表、核对、分析、文档、流程等财务日常任务中真实存在的痛点。</p>
+        </article>
+        <article class="card">
+          <div class="num">2</div>
+          <h3>用 Agent 完成拆解</h3>
+          <p>使用 Work Buddy、Codex 等工具进行任务拆解、提示词迭代、脚本生成或材料产出。</p>
+        </article>
+        <article class="card">
+          <div class="num">3</div>
+          <h3>沉淀可推广案例</h3>
+          <p>把优秀实践整理成案例库、Prompt 模板、自动化脚本或操作手册，服务后续部门推广。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head">
+        <h2>参赛范围</h2>
+        <p>建议支持个人或 2-3 人小组参赛。小组模式更适合跨模块场景，个人模式更利于快速验证。</p>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <h3>参赛对象</h3>
+          <ul class="list">
+            <li>财务部门全体员工均可报名。</li>
+            <li>可个人参赛，也可 2-3 人组队。</li>
+            <li>鼓励各财务模块提交周期性、高频、易推广的工作场景。</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>推荐场景</h3>
+          <ul class="list">
+            <li>财务报表处理：月度分析摘要、预算执行偏差、费用结构分析。</li>
+            <li>数据清洗与核对：多表匹配、异常识别、重复付款检查、科目归类。</li>
+            <li>流程提效：报销审核辅助、付款材料检查、合同付款节点提醒。</li>
+            <li>管理分析：成本费用趋势、利润波动归因、经营数据解读。</li>
+            <li>文档生成：财务说明、会议材料、审计回复、汇报大纲。</li>
+            <li>自动化工具：用 Codex 生成脚本处理 Excel、CSV、PDF 或系统导出数据。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head">
+        <h2>比赛周期</h2>
+        <p>建议周期为 4 周，既给参赛者足够实践时间，也避免活动拖长后热度下降。</p>
+      </div>
+      <div class="panel timeline">
+        <div class="step">
+          <time>第 1 周</time>
+          <div>
+            <h3>宣传报名与选题收集</h3>
+            <p>发布活动通知，收集参赛名单、组队情况和初步选题方向。</p>
+          </div>
+        </div>
+        <div class="step">
+          <time>第 1 周</time>
+          <div>
+            <h3>AI Agent 入门培训</h3>
+            <p>讲解 Work Buddy、Codex 等工具的基本用法、案例标准和数据安全边界。</p>
+          </div>
+        </div>
+        <div class="step">
+          <time>第 2-3 周</time>
+          <div>
+            <h3>作品开发与辅导</h3>
+            <p>参赛者完成场景设计、工具实践、效果验证；主办方可组织一次中期答疑。</p>
+          </div>
+        </div>
+        <div class="step">
+          <time>第 3 周末</time>
+          <div>
+            <h3>作品提交</h3>
+            <p>提交案例说明、提示词或脚本、效果数据、演示材料和必要截图。</p>
+          </div>
+        </div>
+        <div class="step">
+          <time>第 4 周</time>
+          <div>
+            <h3>决赛路演与颁奖</h3>
+            <p>每组 5-8 分钟展示，评委现场打分，公布获奖名单并启动优秀案例沉淀。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head">
+        <h2>提交材料</h2>
+        <p>用统一模板收口，便于评委横向比较，也便于赛后整理成案例库。</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="num">A</div>
+          <h3>案例说明</h3>
+          <p>包括案例名称、业务痛点、原流程耗时、AI 使用方式、解决方案和风险控制。</p>
+        </article>
+        <article class="card">
+          <div class="num">B</div>
+          <h3>效果证明</h3>
+          <p>量化节省时间、减少步骤、降低错误率或提升分析质量；可附前后对比。</p>
+        </article>
+        <article class="card">
+          <div class="num">C</div>
+          <h3>复用材料</h3>
+          <p>提交 Prompt 模板、操作步骤、脚本文件、表格模板或复用说明。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="score">
+      <div class="section-head">
+        <h2>评分标准</h2>
+        <p>总分 100 分。建议评委优先看真实价值，避免比赛变成单纯的工具演示或炫技。</p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>评分维度</th>
+            <th>分值</th>
+            <th>评审重点</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>业务价值</td>
+            <td class="score">30 分</td>
+            <td>是否解决真实财务问题，是否对效率、质量或风险控制有明显帮助。</td>
+          </tr>
+          <tr>
+            <td>AI 使用深度</td>
+            <td class="score">20 分</td>
+            <td>是否充分使用 Agent 能力，例如任务拆解、多轮迭代、自动化、代码生成。</td>
+          </tr>
+          <tr>
+            <td>实际效果</td>
+            <td class="score">20 分</td>
+            <td>是否有量化结果，例如节省时间、减少人工步骤、降低错误率。</td>
+          </tr>
+          <tr>
+            <td>创新性</td>
+            <td class="score">15 分</td>
+            <td>场景是否有启发性，方法是否体现新的工作方式。</td>
+          </tr>
+          <tr>
+            <td>可复制推广</td>
+            <td class="score">10 分</td>
+            <td>是否容易被其他同事、模块或周期性工作复用。</td>
+          </tr>
+          <tr>
+            <td>展示表达</td>
+            <td class="score">5 分</td>
+            <td>路演逻辑是否清晰，材料是否完整，演示是否直观。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head">
+        <h2>奖项设置</h2>
+        <p>现金奖励建议兼顾标杆作品和参与氛围，可按公司预算调整。</p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>奖项</th>
+            <th>数量</th>
+            <th>建议奖励</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>一等奖</td>
+            <td>1 名</td>
+            <td class="score">3000 元</td>
+          </tr>
+          <tr>
+            <td>二等奖</td>
+            <td>2 名</td>
+            <td class="score">2000 元/名</td>
+          </tr>
+          <tr>
+            <td>三等奖</td>
+            <td>3 名</td>
+            <td class="score">1000 元/名</td>
+          </tr>
+          <tr>
+            <td>最佳创新奖</td>
+            <td>1 名</td>
+            <td class="score">800 元</td>
+          </tr>
+          <tr>
+            <td>最佳提效奖</td>
+            <td>1 名</td>
+            <td class="score">800 元</td>
+          </tr>
+          <tr>
+            <td>优秀参与奖</td>
+            <td>若干</td>
+            <td>纪念品或小额奖励</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="wrap">
+      <div class="callout">
+        <div class="section-head">
+          <h2>安全边界</h2>
+          <p>所有案例必须满足公司数据安全、财务内控和人工复核要求。</p>
+        </div>
+        <ul class="list">
+          <li>不得上传公司敏感数据、客户信息、供应商账号、银行账户、合同价格等敏感内容到未经批准的外部 AI 工具。</li>
+          <li>涉及真实数据时必须脱敏处理，必要时使用样例数据演示。</li>
+          <li>AI 生成结果必须经过人工复核，不得直接替代财务审批和内控判断。</li>
+          <li>不得使用 AI 绕过公司审批、系统权限或管理流程。</li>
+          <li>优秀案例正式推广前，需经财务负责人和信息安全相关人员确认。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head">
+        <h2>通知文案</h2>
+        <p>可直接复制到部门群、邮件或 OA 通知中使用。</p>
+      </div>
+      <div class="panel notice">各位同事：
+
+为推动 AI Agent 在财务工作中的实际应用，提升团队数字化和智能化能力，财务部将举办“AI 技能挑战赛”。
+
+本次比赛鼓励大家使用 Work Buddy、Codex 等 AI Agent 工具，围绕真实财务工作场景，解决一个具体问题，形成可展示、可复用、可推广的实践案例。
+
+无论是报表分析、数据核对、费用归类、流程提效，还是文档生成、自动化脚本，只要能够帮助财务工作提质增效，都欢迎报名参与。
+
+优秀作品将获得现金奖励，并有机会作为财务部 AI 标杆案例进行推广。
+
+欢迎大家积极报名，用 AI 解决真实问题，用案例证明价值。</div>
+    </section>
+
+    <footer class="wrap">
+      财务部 AI 技能挑战赛 · 活动方案 · 建议赛程 4 周
+    </footer>
+  </main>
+</body>
+</html>

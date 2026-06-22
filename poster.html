@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>财务部 AI 技能挑战赛海报</title>
+  <style>
+    :root {
+      --ink: #10120e;
+      --green: #0b3b2e;
+      --dark: #071e18;
+      --acid: #d8ff3e;
+      --mint: #bdf7d1;
+      --red: #f04b32;
+      --paper: #fffef8;
+      --line: rgba(255, 254, 248, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      background: #20231c;
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    .poster {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      color: var(--paper);
+      background:
+        radial-gradient(circle at 78% 12%, rgba(216, 255, 62, 0.32) 0 12%, transparent 34%),
+        radial-gradient(circle at 16% 88%, rgba(240, 75, 50, 0.48) 0 9%, transparent 31%),
+        linear-gradient(160deg, var(--green), var(--dark) 62%, #050b09);
+      isolation: isolate;
+    }
+
+    .poster::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -4;
+      background-image:
+        linear-gradient(rgba(255, 254, 248, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 254, 248, 0.1) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, #000 0 72%, transparent 95%);
+    }
+
+    .poster::after {
+      content: "";
+      position: absolute;
+      inset: 32px;
+      z-index: 4;
+      border: 2px solid var(--line);
+      pointer-events: none;
+    }
+
+    .grain {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      opacity: 0.12;
+      background:
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.14) 0 1px, transparent 1px 3px),
+        repeating-linear-gradient(90deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+      mix-blend-mode: overlay;
+    }
+
+    .diagonal {
+      position: absolute;
+      inset: -220px -300px auto auto;
+      z-index: -1;
+      width: 930px;
+      height: 1450px;
+      transform: rotate(22deg);
+      background:
+        linear-gradient(90deg, transparent 0 28%, rgba(255, 254, 248, 0.1) 28% 31%, transparent 31% 42%, rgba(216, 255, 62, 0.18) 42% 47%, transparent 47% 100%);
+    }
+
+    .content {
+      position: relative;
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      padding: 82px 82px 74px;
+    }
+
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 36px;
+      color: rgba(255, 254, 248, 0.78);
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .topline span:last-child {
+      color: var(--acid);
+    }
+
+    .mark-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 122px;
+    }
+
+    .mark {
+      position: relative;
+      width: 360px;
+      height: 360px;
+      border: 5px solid rgba(216, 255, 62, 0.94);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--acid);
+      font-family: "DIN Condensed", "Impact", "Arial Black", sans-serif;
+      font-size: 142px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      box-shadow:
+        inset 0 0 0 38px rgba(216, 255, 62, 0.08),
+        0 0 70px rgba(216, 255, 62, 0.12);
+    }
+
+    .mark::before,
+    .mark::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 254, 248, 0.18);
+    }
+
+    .mark::before {
+      inset: 42px;
+    }
+
+    .mark::after {
+      inset: -34px;
+      border-color: rgba(216, 255, 62, 0.18);
+    }
+
+    .headline {
+      margin-top: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30px;
+      color: var(--mint);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 52px;
+      height: 8px;
+      background: var(--red);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+      font-size: 142px;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+
+    h1 .accent {
+      display: block;
+      color: var(--acid);
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 104px;
+      font-weight: 900;
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      width: 820px;
+      max-width: 100%;
+      margin: 38px 0 0;
+      color: rgba(255, 254, 248, 0.8);
+      font-size: 38px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 62px;
+    }
+
+    .info-card {
+      min-height: 152px;
+      padding: 24px 22px;
+      border: 2px solid rgba(255, 254, 248, 0.2);
+      background: rgba(255, 254, 248, 0.06);
+    }
+
+    .info-card strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--acid);
+      font-family: "DIN Condensed", "Impact", sans-serif;
+      font-size: 48px;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .info-card span {
+      color: rgba(255, 254, 248, 0.78);
+      font-size: 24px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .bottom {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 44px;
+      align-items: end;
+      margin-top: 58px;
+      padding-top: 34px;
+      border-top: 2px solid rgba(255, 254, 248, 0.2);
+    }
+
+    .details {
+      display: grid;
+      gap: 12px;
+      color: rgba(255, 254, 248, 0.76);
+      font-size: 25px;
+      line-height: 1.36;
+      font-weight: 700;
+    }
+
+    .details b {
+      color: var(--paper);
+    }
+
+    .cta {
+      padding: 28px 30px;
+      color: var(--ink);
+      background: var(--acid);
+      font-size: 31px;
+      line-height: 1.28;
+      font-weight: 900;
+      text-align: center;
+      box-shadow: 12px 12px 0 rgba(240, 75, 50, 0.88);
+    }
+  </style>
+</head>
+<body>
+  <article class="poster">
+    <div class="grain"></div>
+    <div class="diagonal"></div>
+    <div class="content">
+      <div class="topline">
+        <span>Finance Department</span>
+        <span>AI Challenge</span>
+      </div>
+
+      <div class="mark-row">
+        <div class="mark">AI</div>
+      </div>
+
+      <section class="headline">
+        <div class="eyebrow">内部赛事 · 现金奖励</div>
+        <h1>
+          财务部
+          <span class="accent">AI 技能挑战赛</span>
+        </h1>
+        <p class="subtitle">
+          用 Work Buddy、Codex 等 Agent 解决真实财务问题，沉淀可复用的提效案例。
+        </p>
+      </section>
+
+      <section class="info">
+        <div class="info-card">
+          <strong>4 周</strong>
+          <span>报名、培训、作品开发、决赛路演</span>
+        </div>
+        <div class="info-card">
+          <strong>100 分</strong>
+          <span>业务价值、AI 深度、实际效果综合评分</span>
+        </div>
+        <div class="info-card">
+          <strong>3000+</strong>
+          <span>一等奖现金奖励，另设创新奖与提效奖</span>
+        </div>
+      </section>
+
+      <section class="bottom">
+        <div class="details">
+          <div><b>参赛对象：</b>财务部全体员工，个人或 2-3 人小组均可</div>
+          <div><b>推荐场景：</b>报表分析、数据核对、流程提效、文档生成、自动化脚本</div>
+          <div><b>作品要求：</b>真实痛点、AI 方案、效果证明、可复用材料</div>
+        </div>
+        <div class="cta">用 AI 解决真实问题<br>用案例证明价值</div>
+      </section>
+    </div>
+  </article>
+</body>
+</html>
